@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+    protected $fillable = [
+    'name',
+    'dates',
+    'status',
+    'taskable_id',
+    'taskable_type',
+    ];
+
+    public function taskable()
+    {
+        return $this->morphTo();
+    }
 }
+

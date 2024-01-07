@@ -11,10 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_pillars', function (Blueprint $table) {
+        Schema::create('routines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('subobjective_id');
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('subobjective_id')->references('id')->on('subobjectives');
         });
+
     }
 
     /**
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_pillars');
+        Schema::dropIfExists('routines');
     }
 };
