@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subobjective_id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->enum('when', ['morning', 'noon', 'afternoon', 'evening']);
             $table->timestamps();
 
             $table->foreign('subobjective_id')->references('id')->on('subobjectives');

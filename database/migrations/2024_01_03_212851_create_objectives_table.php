@@ -16,13 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('subpillar_id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->dateTime('deadline')->nullable();
+            $table->date('deadline')->nullable();
             $table->timestamps();
 
             $table->foreign('subpillar_id')->references('id')->on('subpillars');
         });
-
-
     }
 
     /**

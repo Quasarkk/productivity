@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name');
             $table->dateTime('dates')->nullable();
-            $table->enum('status', ['DONE', 'NOTDONE']);
+            $table->enum('status', ['done', 'not done']);
             $table->unsignedBigInteger('taskable_id'); // For polymorphic relation
             $table->string('taskable_type'); // For polymorphic relation
             $table->timestamps();

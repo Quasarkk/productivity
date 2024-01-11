@@ -15,6 +15,7 @@ class Routine extends Model
         'name',
         'description',
         'dates',
+        'when',
     ];
     public function task(): HasMany
     {
