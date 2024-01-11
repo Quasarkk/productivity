@@ -1,10 +1,15 @@
 <template>
-    <h1>Hello, Inertia!</h1>
+    <AppLayoutVertical>
+        <h1>Hello, Inertia!</h1>
+    </AppLayoutVertical>
   </template>
 
   <script>
+  import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
+
   export default {
-    name: 'Welcome',
+    components: {
+        AppLayoutVertical,
+    },
   };
   </script>
-  
