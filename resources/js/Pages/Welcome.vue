@@ -1,15 +1,23 @@
 <template>
     <AppLayoutVertical>
-        <h1>Hello, Inertia!</h1>
+            <Tasks class="h-screen">
+            </Tasks>
     </AppLayoutVertical>
   </template>
 
   <script>
   import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
+  import Tasks from '@/Components/Custom/Tasks.vue';
+
 
   export default {
+    props:{
+
+    },
+
     components: {
         AppLayoutVertical,
+        Tasks,
     },
   };
   </script>

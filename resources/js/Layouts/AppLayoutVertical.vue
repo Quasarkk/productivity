@@ -32,12 +32,12 @@ const logout = () => {
         <Head :title="title" />
         <Banner />
         <div class=" bg-gray-100 flex">
-            <nav class="bg-slate-400 h-screen w-1/12">
+            <nav class="bg-zinc-300 h-screen w-1/12">
                 <!-- Primary Navigation Menu -->
                 <div>
                     <!-- Navigation Links -->
                     <div>
-                        
+
                     </div>
 
                 </div>
