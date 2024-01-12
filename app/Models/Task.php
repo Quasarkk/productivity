@@ -20,5 +20,15 @@ class Task extends Model
     {
         return $this->morphTo();
     }
+
+    public function scopeTasksDone($query)
+    {
+        return $query->where('status', 'done');
+    }
+
+    public function scopeTasksNotDone($query)
+    {
+        return $query->where('status', 'not done');
+    }
 }
 

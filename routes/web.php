@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\TaskController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +36,9 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::resource("tasks", TaskController::class);
+Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
+
+
+Route::get('/tasks', [TaskController::class, 'index']);
