@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\RoutineController;
+
+
+
 
 
 /*
@@ -25,7 +29,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -40,5 +44,6 @@ Route::middleware([
 Route::resource("tasks", TaskController::class);
 Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
 
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
 
-Route::get('/tasks', [TaskController::class, 'index']);

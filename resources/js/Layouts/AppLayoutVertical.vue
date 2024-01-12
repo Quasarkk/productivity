@@ -36,7 +36,20 @@ const logout = () => {
                 <!-- Primary Navigation Menu -->
                 <div>
                     <!-- Navigation Links -->
-                    <div>
+                    <div class="flex flex-col">
+                        <NavLink :href="route('home')" :active="route().current('home')">
+                            Home
+                        </NavLink>
+
+                        <NavLink :href="route('tasks')" :active="route().current('tasks')">
+                            Tasks
+                        </NavLink>
+
+                        <NavLink :href="route('routines')" :active="route().current('routines')">
+                            routines
+                        </NavLink>
+
+
 
                     </div>
 
