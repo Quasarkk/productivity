@@ -12,47 +12,39 @@
                 <!-- <input v-for="pillar in pillard" type="checkbox"> -->
             </div>
 
-            <!-- Display tasks -->
-            <!-- task to do -->
-            <div class="mt-4">
-                <h3>Todo - {{ tasksNotDoneCount }}</h3>
-                <div v-for="task in tasks" :key="task.id" class="flex hover:bg-gray-200 focus:bg-slate-200 px-4 rounded w-1/3">
-                    <div v-if="task.status === 'not done'" class="flex">
-                        <input class="my-auto" type="checkbox" :checked="task.status === 'done'"
-                            @change="changeCheck(task.id, $event.target.checked)">
-                        <p class="ml-2"> {{ task.name }} </p>
-                        <p> {{ task.relatedType }}  {{ task.relatedName }} </p>
-                        <p> {{ task.taskable }} </p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- tasks done -->
-            <div class="mt-4">
-                <h3>Done - {{ tasksDoneCount }}</h3>
-                <div v-for="task in tasks" :key="task.id" class="flex">
-                    <div v-if="task.status === 'done'" class="flex">
-                        <input checked type="checkbox" :checked="task.status === 'not done'"
-                            @change="changeCheck(task.id, $event.target.checked)">
-                        <p class="ml-2 opacity-50 line-through decoration-2"> {{ task.name }} </p>
-                        <p> {{ task.taskable }} </p>
+            <!-- Display tasks -->
+            <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area">
+                <template #item="{element}">
+                    <div :key="element.id" class="task-item flex hover:bg-gray-200 focus:bg-slate-200 focus:cursor-move hover:cursor-move px-4 rounded">
+                        <span class="drag-handle">☰</span> <!-- Icône pour le drag -->
+                        <input class="my-auto" type="checkbox" :checked="element.status === 'done'"
+                               @change="changeCheck(element.id, $event.target.checked)">
+                        <p class="ml-2" :class="{'opacity-50 line-through decoration-2': element.status === 'done'}">
+                            {{ element.name }}
+                        </p>
+                        <p>{{ element.relatedType }} {{ element.relatedName }}</p>
                     </div>
-                </div>
-            </div>
+                </template>
+            </draggable>
 
 
         </div>
-
-
     </section>
 </template>
 
 <script>
+import draggable from 'vuedraggable';
+
 export default {
     props: {
         tasks: Array,
         tasksNotDoneCount: Number,
         tasksDoneCount: Number,
+    },
+
+    components: {
+        draggable,
     },
 
     data() {
@@ -65,6 +57,11 @@ export default {
 
 
     methods: {
+        updateTasks(newTasks) {
+            this.tasks = newTasks;
+        },
+
+
         create() {
             this.$inertia.post(route('tasks.store'), this.form_create, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
