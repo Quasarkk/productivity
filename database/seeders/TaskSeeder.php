@@ -22,6 +22,7 @@ class TaskSeeder extends Seeder
             'status' => 'not done',
             'taskable_type' => 'App\Models\Routine', // Associated model, here routine
             'taskable_id' => 1, // routine.id
+            'dates' => Carbon::createFromFormat('d-m-Y', '12-01-2024'),
         ]);
 
         // Task associated with Sport pillar pillar_id=2
@@ -31,6 +32,21 @@ class TaskSeeder extends Seeder
             'status' => 'not done',
             'taskable_type' => 'App\Models\Pillar', // Associated model, here routine
             'taskable_id' => 1, // routine.id
+            'dates' => Carbon::createFromFormat('d-m-Y', '12-01-2024'),
+        ]);
+
+        Task::create([
+            'name' => 'Dishes',
+            'dates' => Carbon::createFromFormat('Y-m-d', '2024-01-31'),
+            'status' => 'not done',
+            'dates' => Carbon::createFromFormat('d-m-Y', '12-01-2024'),
+        ]);
+
+        Task::create([
+            'name' => 'Groceries',
+            'dates' => Carbon::createFromFormat('Y-m-d', '2024-01-31'),
+            'status' => 'not done',
+            'dates' => Carbon::createFromFormat('d-m-Y', '12-01-2024'),
         ]);
     }
 }

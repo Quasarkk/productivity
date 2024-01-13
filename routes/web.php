@@ -6,9 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RoutineController;
-
-
-
+use App\Http\Controllers\CalendarController;
 
 
 /*
@@ -46,4 +44,9 @@ Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('ta
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
+
+Route::get('/calendar', function(){
+    return Inertia::render('Custom/CalendarPage');
+})->name('calendar');
+
 

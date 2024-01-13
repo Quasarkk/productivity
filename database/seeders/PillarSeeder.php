@@ -28,6 +28,10 @@ class PillarSeeder extends Seeder
             'description' => 'Job searching, freelancing, coding',
         ]);
 
+        DB::table('pillars')->insert([
+            'name' => 'Adult life',
+            'description' => 'Papers, dishes, washing, laundries',
+        ]);
 
     }
 }
