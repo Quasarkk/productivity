@@ -30,6 +30,27 @@ class TaskController extends Controller
         ]);
     }
 
+    public function indexCalendarPage() {
+        $tasks = Task::with('taskable')->get()->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'name' => $task->name,
+                'status' => $task->status,
+                'relatedType' => class_basename($task->taskable),
+                'relatedName' => $task->taskable ? $task->taskable->name : null,
+            ];
+        });
+
+        $tasksNotDoneCount = Task::where('status', 'not done')->count();
+        $tasksDoneCount = Task::where('status', 'done')->count();
+
+        return Inertia::render('Custom/CalendarPage', [
+            'tasks' => $tasks,
+            'tasksNotDoneCount' => $tasksNotDoneCount,
+            'tasksDoneCount' => $tasksDoneCount
+        ]);
+    }
+
 
 
     public function store(Request $request)

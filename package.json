@@ -24,7 +24,6 @@
         "@inertiajs/progress": "^0.1.2",
         "@inertiajs/vue3": "^1.0.14",
         "vue-loader": "^17.4.2",
-        "vuedraggable": "^4.1.0",
-        "vuetify": "^3.4.10"
+        "vuedraggable": "^4.1.0"
     }
 }
