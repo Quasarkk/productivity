@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-orange-50">
+    <section class="bg-slate-200 rounded-xl border-2 border-slate-400">
         <h2 class="w-full text-center">TASKS</h2>
         <div class="mx-4 my-4">
             <h3>Today</h3>

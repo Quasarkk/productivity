@@ -38,6 +38,10 @@ class TaskController extends Controller
                 'status' => $task->status,
                 'relatedType' => class_basename($task->taskable),
                 'relatedName' => $task->taskable ? $task->taskable->name : null,
+
+                'dates' => $task->dates,
+                'begin_hour' => $task->begin_hour,
+                'end_hour' => $task->end_hour,
             ];
         });
 

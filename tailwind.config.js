@@ -17,8 +17,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+
+            gridTemplateRows: {
+                // Simple 16 row grid
+                '16': 'repeat(16, minmax(0, 1fr))',
         },
     },
 
     plugins: [forms, typography],
-};
+}};
