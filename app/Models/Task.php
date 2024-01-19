@@ -11,6 +11,8 @@ class Task extends Model
     protected $fillable = [
     'name',
     'dates',
+    'begin_hour',
+    'end_hour',
     'status',
     'taskable_id',
     'taskable_type',

@@ -45,14 +45,14 @@ const logout = () => {
                             Tasks
                         </NavLink>
 
-                        <NavLink :href="route('routines')" :active="route().current('routines')">
-                            routines
+                        <NavLink :href="route('calendar')" :active="route().current('calendar')">
+                            Calendar
                         </NavLink>
 
-
-
+                        <NavLink :href="route('routines')" :active="route().current('routines')">
+                            Routines
+                        </NavLink>
                     </div>
-
                 </div>
             </nav>
 
