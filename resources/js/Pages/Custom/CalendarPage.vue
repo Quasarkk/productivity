@@ -210,6 +210,7 @@ export default {
         goToPreviousMonth() {
             this.selectedMonth = this.selectedMonth.clone().subtract(1, 'months');
         },
+
         goToNextMonth() {
             this.selectedMonth = this.selectedMonth.clone().add(1, 'months');
         },
@@ -217,6 +218,7 @@ export default {
         goToPreviousWeek() {
             this.selectedWeek = this.selectedWeek.clone().subtract(1, 'weeks');
         },
+
         goToNextWeek() {
             this.selectedWeek = this.selectedWeek.clone().add(1, 'weeks');
         },
@@ -226,6 +228,7 @@ export default {
             this.selectedDay = newDay;
             this.currentDay = newDay.format('ddd');
         },
+
         goToNextDay() {
             let newDay = this.selectedDay.clone().add(1, 'days');
             this.selectedDay = newDay;
@@ -237,11 +240,13 @@ export default {
             this.isWeeklyPlanning = false;
             this.isMonthlyPlanning = true;
         },
+
         ShowWeeklyPlanning() {
             this.isDailyPlanning = false;
             this.isWeeklyPlanning = true;
             this.isMonthlyPlanning = false;
         },
+
         ShowDailyPlanning() {
             this.isDailyPlanning = true;
             this.isWeeklyPlanning = false;
@@ -254,6 +259,7 @@ export default {
             // Filtrez les tâches en fonction de la date
             return this.tasks.filter(task => moment(task.dates).format('YYYY-MM-DD') === formattedDay);
         },
+
         getTasksForDayAndHour(day, hour) {
             const weekDay = this.selectedWeek.clone().day(day).format('YYYY-MM-DD');
             const hourTime = moment(`${weekDay} ${hour}`, 'YYYY-MM-DD HH:mm');
@@ -276,6 +282,7 @@ export default {
                 return taskStart.isSameOrBefore(hourTime) && taskEnd.isSameOrAfter(hourTime);
             });
         },
+
         isCurrentDate(day) {
             return day.isSame(moment(), 'day');
         },
@@ -293,6 +300,8 @@ export default {
 
             return weekNumberInMonth;
         },
+
+
     },
     computed: {
         weeksInMonth() {
