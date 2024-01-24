@@ -7,6 +7,13 @@ use Inertia\Inertia;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\SubobjectiveController;
+use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\PillarController;
+use App\Http\Controllers\SubpillarController;
+
+
+
 
 
 /*
@@ -41,8 +48,10 @@ Route::middleware([
 
 Route::resource("tasks", TaskController::class);
 Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
-
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+
+Route::resource("routines", RoutineController::class);
+Route::resource("subobjectives", SubobjectiveController::class);
 Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
 
 Route::get('/calendar', [TaskController::class, 'indexCalendarPage'])->name('calendar');
