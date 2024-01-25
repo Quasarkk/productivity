@@ -61,6 +61,10 @@ class TaskController extends Controller
     {
         $valid_data = Validator::make($request->all(), [
             'name' => ['required'],
+            'dates' => ['required'],
+            'begin_hour' => ['nullable'],
+            'end_hour' =>['nullable'],
+
         ])->validate();
 
         Task::create($valid_data);
@@ -69,10 +73,18 @@ class TaskController extends Controller
     public function update (Request $request, Task $task)
     {
         $valid_data = Validator::make($request->all(), [
-            'status' => ['required',],
+            'name' => ['required'],
+            'dates' => ['required'],
+            'begin_hour' => ['nullable'],
+            'end_hour' =>['nullable'],
         ])->validate();
 
         $task->update($valid_data);
+    }
+
+    public function destroy(Task $task)
+    {
+        $task->delete();
     }
 }
 

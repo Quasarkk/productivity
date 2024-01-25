@@ -104,8 +104,6 @@
                 <p>Create a routine</p>
                 <!-- NAME -->
                 <div class="mt-3">
-                    <!-- <div v-if="errors.name" class="text-red-700 text-lg mx-auto flex justify-center">{{ errors.name }}
-                        </div> -->
                     <label class="block font-medium text-gray-700 capitalize">Name</label>
                     <input
                         class="block mt-1 w-full rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 shadow-sm"
@@ -148,8 +146,8 @@
                 <!-- UPDATE BUTTON  -->
                 <button @click="update(form_update)"
                     class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
-                    Update this routine</button>
-
+                    Update this routine
+                </button>
             </div>
         </div>
 

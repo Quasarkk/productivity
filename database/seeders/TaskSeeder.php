@@ -17,7 +17,7 @@ class TaskSeeder extends Seeder
     {
         // Task associated with Sport pillar pillar_id=2
         Task::create([
-            'name' => 'Manger',
+            'name' => '27 janvier',
             'status' => 'not done',
             'taskable_type' => 'App\Models\Pillar', // Associated model, here routine
             'taskable_id' => 1, // routine.id
@@ -27,25 +27,23 @@ class TaskSeeder extends Seeder
         ]);
 
         Task::create([
-            'name' => 'muscu',
+            'name' => '24 janvier',
             'status' => 'not done',
-            'dates' => Carbon::createFromFormat('d-m-Y', '27-01-2024'),
+            'dates' => Carbon::createFromFormat('d-m-Y', '24-01-2024'),
             'begin_hour' => Carbon::createFromTimeString('13:30'),
             'end_hour' => Carbon::createFromTimeString('14:30'),
         ]);
 
         Task::create([
-            'name' => 'courses',
-            'dates' => Carbon::createFromFormat('Y-m-d', '2024-01-31'),
+            'name' => '25 janvier',
             'status' => 'not done',
-            'dates' => Carbon::createFromFormat('d-m-Y', '27-01-2024'),
+            'dates' => Carbon::createFromFormat('d-m-Y', '25-01-2024'),
             'begin_hour' => Carbon::createFromTimeString('17:00'),
             'end_hour' => Carbon::createFromTimeString('18:00'),
         ]);
 
         Task::create([
-            'name' => 'courses',
-            'dates' => Carbon::createFromFormat('Y-m-d', '2024-01-31'),
+            'name' => '26 janvier',
             'status' => 'not done',
             'dates' => Carbon::createFromFormat('d-m-Y', '26-01-2024'),
             'begin_hour' => Carbon::createFromTimeString('17:00'),

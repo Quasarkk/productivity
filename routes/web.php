@@ -47,7 +47,7 @@ Route::middleware([
 });
 
 Route::resource("tasks", TaskController::class);
-Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
+// Route::put('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 
 Route::resource("routines", RoutineController::class);

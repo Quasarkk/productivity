@@ -66,9 +66,166 @@
                         </div>
                     </div>
                     <div class="h-screen w-1/2">
-                        <Tasks :tasks="tasks" :tasksNotDoneCount="tasksNotDoneCount" :tasksDoneCount="tasksDoneCount">
-                        </Tasks>
+                        <section class="bg-slate-200 rounded-xl border-2 border-slate-400">
+                            <h2 class="w-full text-center">TASKS</h2>
+                            <div class="mx-4 my-4">
+                                <div class="flex justify-between w-">
+                                    <h3> Today</h3>
+                                    <button @click="isOpenCreateTask = true"
+                                        class="ml-2 px-2 py-1 flex bg-blue-200 rounded-xl border-blue-700 border-[1.8px]">Add<svg
+                                            xmlns="http://www.w3.org/2000/svg" class="w-6" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M12 5l0 14" />
+                                            <path d="M5 12l14 0" />
+                                        </svg></button>
+                                </div>
+                                <!-- Create a task -->
+                                <div class="flex">
+                                    <!-- <input v-model="form_createTask.name" placeholder="Do the dishes" class="pl-2 rounded"> -->
+                                </div>
+                                <!-- Display tasks -->
+                                <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area">
+                                    <template #item="{ element }">
+                                        <div :key="element.id" @click="edit(element)"
+                                            class="task-item flex hover:bg-gray-200 focus:bg-slate-200 focus:cursor-move hover:cursor-move px-4 rounded">
+                                            <span class="drag-handle">☰</span> <!-- Icône pour le drag -->
+                                            <input class="my-auto" type="checkbox" :checked="element.status === 'done'"
+                                                @change="changeCheck(element.id, $event.target.checked)">
+                                            <p class="ml-2"
+                                                :class="{ 'opacity-50 line-through decoration-2': element.status === 'done' }">
+                                                {{ element.name }}
+                                            </p>
+                                            <p>{{ element.relatedType }} {{ element.relatedName }}</p>
+                                        </div>
+                                    </template>
+                                </draggable>
+                            </div>
+                        </section>
+
                     </div>
+                </div>
+            </div>
+
+            <!-- MODALE CREATE TASK -->
+            <div v-if="isOpenCreateTask"
+                class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
+                <!-- CREATE CARD -->
+                <div class=" w-6/12 p-6 bg-white my-auto rounded-lg">
+                    <!-- CLOSE BUTTONS -->
+                    <div class="flex items-center justify-end mb-3">
+                        <button @click="closeCreateModale" class="">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p>Create a task</p>
+                    <!-- NAME -->
+                    <div class="mt-3">
+                        <label class="block font-medium text-gray-700 capitalize">Name</label>
+                        <input
+                            class="block mt-1 w-full rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 shadow-sm"
+                            v-model="form_createTask.name" type="text">
+                    </div>
+
+                    <!-- DATES -->
+                    <label class="block  mt-3 font-medium text-gray-700 capitalize-first">dates</label>
+                    <div class="flex items-center">
+                        <input class="rounded mr-1 focus:ring-0 focus:ring-offset-0" type="date"
+                            v-model="form_createTask.dates">
+                    </div>
+
+                    <!-- BEGIN AND END HOURS -->
+                    <div class="mt-3 flex">
+                        <!-- Begin -->
+                        <div class="mr-16">
+                            <label class="block font-medium text-gray-700 capitalize-first">Begin hour</label>
+                            <input v-model="form_createTask.begin_hour" type="time">
+                        </div>
+                        <!-- END -->
+                        <div class="">
+                            <label class="block font-medium text-gray-700 capitalize-first">End hour</label>
+                            <input v-model="form_createTask.end_hour" type="time">
+                        </div>
+                    </div>
+
+                    <!-- CREATE BUTTON  -->
+                    <button @click="createTask(form_createTask)"
+                        class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
+                        Create a task
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- MODALE EDIT TASK -->
+            <div v-if="isOpenEditTask"
+                class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
+                <!-- CREATE CARD -->
+                <div class=" w-6/12 p-6 bg-white my-auto rounded-lg">
+                    <!-- CLOSE AND DELETE BUTTONS -->
+                    <div class="flex items-center justify-end mb-3">
+                        <!-- CLOSE BUTTON -->
+                        <button @click="closeEditModale" class="">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
+                        </button>
+                        <!-- DELETE BUTTON -->
+                        <button @click="destroy(selectedTask)"><svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24"
+                                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg></button>
+                    </div>
+                    <p>Edit a task</p>
+                    <!-- NAME -->
+                    <div class="mt-3">
+                        <label class="block font-medium text-gray-700 capitalize">Name</label>
+                        <input
+                            class="block mt-1 w-full rounded-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500 shadow-sm"
+                            v-model="form_editTask.name" type="text">
+                    </div>
+
+                    <!-- DATES -->
+                    <label class="block  mt-3 font-medium text-gray-700 capitalize-first">dates</label>
+                    <div class="flex items-center">
+                        <input class="rounded mr-1 focus:ring-0 focus:ring-offset-0" type="date"
+                            v-model="form_editTask.dates">
+                    </div>
+
+                    <!-- BEGIN AND END HOURS -->
+                    <div class="mt-3 flex">
+                        <!-- Begin -->
+                        <div class="mr-16">
+                            <label class="block font-medium text-gray-700 capitalize-first">Begin hour</label>
+                            <input v-model="form_editTask.begin_hour" type="time">
+                        </div>
+                        <!-- END -->
+                        <div class="">
+                            <label class="block font-medium text-gray-700 capitalize-first">End hour</label>
+                            <input v-model="form_editTask.end_hour" type="time">
+                        </div>
+                    </div>
+
+                    <!-- UPDATE BUTTON  -->
+                    <button @click="updateTask(form_editTask)"
+                        class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
+                        Update the task
+                    </button>
+
                 </div>
             </div>
 
@@ -105,7 +262,7 @@
                         <!-- Afficher chaque jour de la semaine avec sa date -->
                         <div v-for="(day, index) in weekDaysWithDates" :key="index" class="border-l-2 border-black">
                             <div class="text-center font-bold text-xl h-24 border-b-2 border-black p-4"
-                                 :class="{ 'text-orange-400': isCurrentDate(day)}">
+                                :class="{ 'text-orange-400': isCurrentDate(day) }">
                                 {{ day.format('ddd D') }} <!-- Affiche le jour et le numéro du jour -->
                             </div>
                             <!-- Time slots for each hour in the day -->
@@ -173,11 +330,13 @@
 import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
 import Tasks from '@/Components/Custom/Tasks.vue'
 import moment from 'moment';
+import draggable from 'vuedraggable';
 
 export default {
     components: {
         AppLayoutVertical,
         Tasks,
+        draggable,
     },
 
     props: {
@@ -188,9 +347,31 @@ export default {
 
     data() {
         return {
+            isOpenCreateTask: false,
+            isOpenEditTask: false,
+            selectedTask: null,
+
             isDailyPlanning: false,
             isWeeklyPlanning: false,
             isMonthlyPlanning: true,
+
+            form_createTask: {
+                name: null,
+                dates: null,
+                begin_hour: null,
+                end_hour: null,
+                taskable_type: null,
+                taskable_id: null,
+            },
+
+            form_editTask: {
+                name: null,
+                dates: null,
+                begin_hour: null,
+                end_hour: null,
+                taskable_type: null,
+                taskable_id: null,
+            },
 
             selectedMonth: moment(),
             selectedDay: moment(),
@@ -206,7 +387,53 @@ export default {
         }
     },
 
+    watch: {
+        selectedTask: {
+            handler() {
+                if (this.selectedTask) {
+                    this.form_editTask.name = this.selectedTask.name;
+                    this.form_editTask.dates = this.selectedTask.dates;
+                    this.form_editTask.begin_hour = this.selectedTask.begin_hour;
+                    this.form_editTask.end_hour = this.selectedTask.end_hour;
+                    this.form_editTask.taskable_type = this.selectedTask.taskable_type;
+                    // this.form_editTask.taskable_id = this.selectedTask.taskable_id;
+                }
+            },
+            deep: true,
+            immediate: true
+        }
+    },
+
     methods: {
+        // MODALE AND CRUD TASK
+        closeCreateModale() {
+            this.resetCreateForm();
+            this.isOpenCreateTask = false;
+        },
+        closeEditModale() {
+            this.isOpenEditTask = false;
+        },
+        resetCreateForm() {
+            // reinitialize form
+            this.form_createTask.name = null;
+            this.form_createTask.dates = null;
+            this.form_createTask.begin_hour = null;
+            this.form_createTask.end_hour = null;
+            this.form_createTask.taskable_type = null;
+            this.form_createTask.taskable_id = null;
+        },
+        edit(element) {
+            this.selectedTask = element;
+            this.isOpenEditTask = true;
+        },
+        destroy(task) {
+            this.isOpenEditTask = false;
+            this.$inertia.delete(route('tasks.destroy', task));
+        },
+
+
+
+        // CALENDAR NAVIGATION
         goToPreviousMonth() {
             this.selectedMonth = this.selectedMonth.clone().subtract(1, 'months');
         },
@@ -301,8 +528,26 @@ export default {
             return weekNumberInMonth;
         },
 
+        //TASKS
+        updateTask() {
+            this.$inertia.put(route('tasks.update', { task: this.selectedTask.id }), this.form_editTask, {
+                onSuccess: () => this.isOpenEditTask = false,
+            })
+        },
 
+        createTask() {
+            this.$inertia.post(route('tasks.store'), this.form_createTask, {
+                onSuccess: () => this.isOpenCreateTask = false,
+            });
+        },
+
+        changeCheck(taskId, isChecked) {
+            this.$inertia.post(route('tasks.update', { id: taskId }), {
+                status: isChecked ? 'done' : 'not done'
+            });
+        },
     },
+
     computed: {
         weeksInMonth() {
             let weeks = [];
