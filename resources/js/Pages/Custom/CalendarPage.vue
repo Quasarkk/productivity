@@ -86,7 +86,8 @@
                                     <!-- <input v-model="form_createTask.name" placeholder="Do the dishes" class="pl-2 rounded"> -->
                                 </div>
                                 <!-- Display tasks -->
-                                <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area">
+                                <draggable :list="getTasksForSelectedDay()" @end="updateTaskOrder" @input="updateTasks"
+                                    class="drag-area">
                                     <template #item="{ element }">
                                         <div :key="element.id" @click="edit(element)"
                                             class="task-item flex hover:bg-gray-200 focus:bg-slate-200 focus:cursor-move hover:cursor-move px-4 rounded">
@@ -269,7 +270,7 @@
                             <div class="grid grid-rows-9">
                                 <div v-for="(hour, hourIndex) in hours" :key="`timeslot-${day}-${hourIndex}`"
                                     class="h-24 border-b border-black flex items-center justify-center box-border">
-                                    <template v-for="task in getTasksForDayAndHour(day, hour)" :key="task.id">
+                                    <template v-for="task in getTasksWeekly(day, hour)" :key="task.id">
                                         <span>{{ task.name }}</span>
                                     </template>
                                 </div>
@@ -308,16 +309,16 @@
                 </div>
                 <!-- Calendar's grid -->
                 <div class="grid grid-cols-7 gap-2 text-center mt-2 w-[98%] mx-auto">
-                    <!-- Boucle sur chaque semaine puis sur chaque jour de la semaine -->
-                    <div v-for="( week, weekIndex ) in  weeksInMonth " :key="weekIndex" class="contents">
-                        <div class="py-2 h-28 border-2 rounded-xl" v-for="( dayInfo, dayIndex ) in  week " :key="dayIndex"
-                            :class="{
-                                'bg-gray-200': !dayInfo.isInCurrentMonth,
-                                'bg-slate-100': dayInfo.isInCurrentMonth,
-                                'font-bold text-orange-600': dayInfo.date.isSame(new Date(), 'day')
-                            }
-                                ">
-                            {{ dayInfo.date.format('D') }}
+                    <!-- Loop over each week and then each day of the week -->
+                    <div v-for="(week, weekIndex) in weeksInMonth" :key="weekIndex" class="contents">
+                        <div v-for="(dayInfo, dayIndex) in week" :key="dayIndex" class="py-2 h-28 border-2 rounded-xl"
+                            :class="{ 'bg-gray-200': !dayInfo.isInCurrentMonth, 'bg-slate-100': dayInfo.isInCurrentMonth, 'font-bold text-orange-600': dayInfo.date.isSame(new Date(), 'day') }">
+                            <div>{{ dayInfo.date.format('D') }}</div>
+                            <!-- Display tasks for each day -->
+                            <div v-for="task in getTasksMonthly(dayInfo.date)" :key="task.id" class="task-item">
+                                <!-- Display task details here -->
+                                {{ task.name }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -480,6 +481,13 @@ export default {
             this.isMonthlyPlanning = false;
         },
 
+        // TASKS
+        getTasksForSelectedDay() {
+            const selectedDate = this.selectedDay.format('YYYY-MM-DD'); // Obtient la date d'aujourd'hui
+            return this.tasks.filter(task => moment(task.dates).format('YYYY-MM-DD') === selectedDate);
+        },
+
+        // CALENDAR
         getTasksForDay(day) {
             // Format the day to match the date format of the tasks
             const formattedDay = moment(day, 'ddd').startOf('isoWeek').format('YYYY-MM-DD');
@@ -487,6 +495,35 @@ export default {
             return this.tasks.filter(task => moment(task.dates).format('YYYY-MM-DD') === formattedDay);
         },
 
+        // DISPLAY TASKS FOR THE MONTHLY PLANNING
+        getTasksMonthly(day) {
+            const formattedDay = moment(day).format('YYYY-MM-DD');
+
+            return this.tasks.filter(task => {
+                const taskDateStr = moment(task.dates).format('YYYY-MM-DD');
+                return taskDateStr === formattedDay;
+            });
+        },
+
+        // DISPLAY TASKS IN THE WEEKLY PLANNING
+        getTasksWeekly(day, hour) {
+            const formattedDay = moment(day).format('YYYY-MM-DD');
+            const hourTime = moment(`${formattedDay} ${hour}`, 'YYYY-MM-DD HH:mm');
+
+            return this.tasks.filter(task => {
+                const taskDateStr = moment(task.dates).format('YYYY-MM-DD');
+                const taskStartTimeStr = `${taskDateStr} ${task.begin_hour}`;
+                const taskEndTimeStr = `${taskDateStr} ${task.end_hour}`;
+
+                const taskStart = moment(taskStartTimeStr, 'YYYY-MM-DD HH:mm');
+                const taskEnd = moment(taskEndTimeStr, 'YYYY-MM-DD HH:mm');
+
+                return taskStart.isSameOrBefore(hourTime) && taskEnd.isSameOrAfter(hourTime);
+            });
+        },
+
+
+        // DISPLAY TASKS IN THE DAILY PLANNING
         getTasksForDayAndHour(day, hour) {
             const weekDay = this.selectedWeek.clone().day(day).format('YYYY-MM-DD');
             const hourTime = moment(`${weekDay} ${hour}`, 'YYYY-MM-DD HH:mm');
@@ -528,7 +565,7 @@ export default {
             return weekNumberInMonth;
         },
 
-        //TASKS
+        //TASKS FUNCTIONS
         updateTask() {
             this.$inertia.put(route('tasks.update', { task: this.selectedTask.id }), this.form_editTask, {
                 onSuccess: () => this.isOpenEditTask = false,
