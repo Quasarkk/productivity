@@ -237,27 +237,6 @@ export default {
             // this.errors.tags = null;
         },
         resetUpdateForm() {
-            // reinitialize form
-            // this.form_create.title = null;
-            // this.form_create.content = null;
-            // this.form_create.type = null;
-            // this.form_create.url = null;
-            // this.form_create.publication_date = null;
-            // this.form_create.begin_date = null;
-            // this.form_create.end_date = null;
-            // this.form_create.status = null;
-            // this.form_create.tags = [];
-
-            // // reinitialize errors
-            // this.errors.title = null;
-            // this.errors.content = null;
-            // this.errors.type = null;
-            // this.errors.url = null;
-            // this.errors.publication_date = null;
-            // this.errors.begin_date = null;
-            // this.errors.end_date = null;
-            // this.errors.status = null;
-            // this.errors.tags = null;
         },
         edit(routine) {
             this.selectedRoutine = routine;
