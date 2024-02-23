@@ -5,3 +5,16 @@
 [x-cloak] {
     display: none;
 }
+
+@layer components {
+    .task-stripe::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 5px 0 0 5px;
+      bottom: 0;
+      width: 6px; /* Largeur de la bordure simulée */
+      background-image: repeating-linear-gradient(45deg, #fb923c 0, #fb923c 10px, #fecaca 10px, #fecaca 20px);
+    }
+  }
