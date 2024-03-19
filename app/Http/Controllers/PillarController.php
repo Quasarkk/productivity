@@ -32,4 +32,20 @@ class PillarController extends Controller
 
         $pillar = Pillar::create($valid_data);
     }
+
+    public function update(Request $request, Pillar $pillar)
+{
+    // Validation des données reçues
+    $valid_data = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'description' => ['required', 'string'],
+    ])->validate();
+
+    // Mise à jour du pilier
+    $pillar->update($valid_data);
+
+    // Redirection ou retour d'une réponse, selon votre application
+    // Par exemple, redirigez vers la page d'index avec un message de succès :
+    return redirect()->route('pillars.index')->with('success', 'Pillar updated successfully.');
+}
 }

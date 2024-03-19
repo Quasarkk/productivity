@@ -24,6 +24,17 @@ public function store(Request $request) {
     return redirect()->back()->with('success', 'Subpillar created successfully.');
 }
 
+public function update(Request $request, Subpillar $subpillar)
+{
+    // Validation des données reçues
+    $valid_data = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'description' => ['required', 'string'],
+        'pillar_id' => 'required|exists:pillars,id',
 
-    // ... autres méthodes ...
+    ])->validate();
+
+    // Mise à jour du pilier
+    $subpillar->update($valid_data);
+}
 }

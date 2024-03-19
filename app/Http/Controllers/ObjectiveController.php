@@ -22,4 +22,19 @@ class ObjectiveController extends Controller
         // Retourner une réponse
         return redirect()->back()->with('success', 'Objective created successfully.');
     }
+
+    public function update(Request $request, Objective $objective)
+{
+    // Validation des données reçues
+    $valid_data = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'description' => ['required', 'string'],
+        'deadline' => 'required',
+        'subpillar_id' => 'required|exists:pillars,id',
+
+    ])->validate();
+
+    // Mise à jour du pilier
+    $objective->update($valid_data);
+}
 }
