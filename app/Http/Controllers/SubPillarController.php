@@ -37,4 +37,12 @@ public function update(Request $request, Subpillar $subpillar)
     // Mise à jour du pilier
     $subpillar->update($valid_data);
 }
+
+public function destroy(Subpillar $subpillar)
+{
+    $subpillar->delete();
+
+    return redirect()->back()->with('success', 'Subpillar deleted successfully.');
+}
+
 }

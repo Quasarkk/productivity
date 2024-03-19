@@ -37,4 +37,12 @@ class SubobjectiveController extends Controller
         // Mise à jour du pilier
         $subobjective->update($valid_data);
     }
+
+    public function destroy(Subobjective $subobjective)
+{
+    $subobjective->delete();
+
+    return redirect()->back()->with('success', 'Subobjective deleted successfully.');
+}
+
 }

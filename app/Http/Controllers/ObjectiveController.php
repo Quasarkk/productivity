@@ -37,4 +37,12 @@ class ObjectiveController extends Controller
     // Mise à jour du pilier
     $objective->update($valid_data);
 }
+
+public function destroy(Objective $objective)
+{
+    $objective->delete();
+
+    return redirect()->back()->with('success', 'Objective deleted successfully.');
+}
+
 }

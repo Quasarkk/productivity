@@ -142,9 +142,26 @@
             <div v-if="isOpenEditPillar"
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
-                    <div class="flex items-center justify-end mb-3">
-                        <button @click="closeEditModalPillar" class="">
-                            <!-- SVG Close Icon -->
+                    <div class="flex items-center justify-between mb-3">
+                        <button @click="deletePillar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
+
+                        <button @click="closeEditModalPillar">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
                         </button>
                     </div>
                     <p>Edit a pillar</p>
@@ -204,9 +221,25 @@
             <div v-if="isOpenEditSubpillar"
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
-                    <div class="flex items-center justify-end mb-3">
+                    <div class="flex items-center justify-between mb-3">
+                        <button @click="deleteSubpillar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
                         <button @click="closeEditModalSubpillar">
-                            <!-- SVG Close Icon -->
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
                         </button>
                     </div>
                     <p>Edit Subpillar</p>
@@ -269,9 +302,25 @@
             <div v-if="isOpenEditObjective"
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
-                    <div class="flex items-center justify-end mb-3">
-                        <button @click="closeEditModalObjective">
-                            <!-- SVG Close Icon -->
+                    <div class="flex items-center justify-between mb-3">
+                        <button @click="deleteObjective()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
+                        <button @click="closeEditModalObjective()">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
                         </button>
                     </div>
                     <p>Edit Objective</p>
@@ -305,7 +354,11 @@
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Créer un Sous-Objectif</h3>
                         <button @click="closeCreateModalSubobjective" class="text-red-500 hover:text-red-600">
-                            <!-- SVG Close Icon -->
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
                         </button>
                     </div>
                     <div class="space-y-4">
@@ -334,9 +387,25 @@
             <div v-if="isOpenEditSubobjective"
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
-                    <div class="flex items-center justify-end mb-3">
-                        <button @click="closeEditModalSubobjective">
-                            <!-- SVG Close Icon -->
+                    <div class="flex items-center justify-between mb-3">
+                        <button @click="deleteSubobjective()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 7l16 0" />
+                                <path d="M10 11l0 6" />
+                                <path d="M14 11l0 6" />
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            </svg>
+                        </button>
+                        <button @click="closeEditModalSubobjective()">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
+                            </svg>
                         </button>
                     </div>
                     <p>Edit Subobjective</p>
@@ -359,8 +428,6 @@
                     </button>
                 </div>
             </div>
-
-
 
 
         </div>
@@ -399,6 +466,7 @@ export default {
                 name: null,
                 description: null,
             },
+
 
 
 
@@ -482,11 +550,9 @@ export default {
             this.form_editPillar = { ...pillar };
             this.isOpenEditPillar = true;
         },
-
         closeEditModalPillar() {
             this.isOpenEditPillar = false;
         },
-
         editPillar() {
             console.log(this.form_editPillar);
             // Ici, vous pouvez appeler votre API pour mettre à jour le pilier
@@ -498,6 +564,18 @@ export default {
                 },
             });
         },
+        //delete
+        deletePillar() {
+            if (!confirm("Are you sure you want to delete this pillar?")) return;
+
+            this.$inertia.delete(route('pillars.destroy', this.selectedPillarForEdit.id), {
+                onSuccess: () => {
+                    this.closeEditModalPillar();
+                },
+            });
+        },
+
+
 
 
 
@@ -542,6 +620,16 @@ export default {
                 onSuccess: () => {
                     this.closeEditModalSubpillar();
                     // Mettez à jour l'UI ou rafraîchissez les données si nécessaire
+                },
+            });
+        },
+        //delete
+        deleteSubpillar() {
+            if (!confirm("Are you sure you want to delete this subpillar?")) return;
+
+            this.$inertia.delete(route('subpillars.destroy', this.selectedSubpillarForEdit.id), {
+                onSuccess: () => {
+                    this.closeEditModalSubpillar();
                 },
             });
         },
@@ -594,6 +682,16 @@ export default {
                 },
             });
         },
+        //delete
+        deleteObjective() {
+            if (!confirm("Are you sure you want to delete this objective?")) return;
+
+            this.$inertia.delete(route('objectives.destroy', this.selectedObjectiveForEdit.id), {
+                onSuccess: () => {
+                    this.closeEditModalObjective();
+                },
+            });
+        },
 
 
 
@@ -639,6 +737,16 @@ export default {
                 onSuccess: () => {
                     this.closeEditModalSubobjective();
                     // Mettez à jour l'UI ou rafraîchissez les données si nécessaire
+                },
+            });
+        },
+        //delete
+        deleteSubobjective() {
+            if (!confirm("Are you sure you want to delete this subobjective?")) return;
+
+            this.$inertia.delete(route('subobjectives.destroy', this.selectedSubobjectiveForEdit.id), {
+                onSuccess: () => {
+                    this.closeEditModalSubobjective();
                 },
             });
         },
