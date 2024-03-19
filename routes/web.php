@@ -46,15 +46,26 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource("tasks", TaskController::class);
-Route::post('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+Route::resource("pillars", PillarController::class);
+Route::resource("subpillars", SubpillarController::class);
+Route::resource("objectives", ObjectiveController::class);
+Route::resource("subobjectives", SubobjectiveController::class);
+
+
+
+
 
 Route::resource("routines", RoutineController::class);
-Route::resource("subobjectives", SubobjectiveController::class);
-Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
+Route::resource("tasks", TaskController::class);
+// Route::put('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
 
+Route::resource("subobjectives", SubobjectiveController::class);
+
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
+Route::get('/goals', [PillarController::class, 'index'])->name('goals');
 Route::get('/calendar', [TaskController::class, 'indexCalendarPage'])->name('calendar');
+
 
 // Route::get('/calendar', function(){
 //     return Inertia::render('Custom/CalendarPage');

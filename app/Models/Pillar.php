@@ -17,10 +17,9 @@ class Pillar extends Model
         'ideal',
     ];
 
-    public function subpillar(): HasMany
+    public function subpillars() // La méthode devrait être au pluriel
     {
         return $this->hasMany(Subpillar::class);
     }
 
-    
 }

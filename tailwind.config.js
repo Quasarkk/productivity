@@ -16,12 +16,14 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                nunito : ['Nunito'],
+                poppins : ['Poppins'],
             },
 
             gridTemplateRows: {
                 // Simple 16 row grid
                 '16': 'repeat(16, minmax(0, 1fr))',
-        },
+            },
     },
 
     plugins: [forms, typography],

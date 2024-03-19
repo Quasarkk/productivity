@@ -15,7 +15,7 @@ class Subobjective extends Model
         'name',
         'deadline',
         'description',
-        'deadline',
+        'objective_id',
     ];
 
     public function subpillar(): BelongsTo

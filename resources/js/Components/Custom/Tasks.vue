@@ -2,11 +2,11 @@
     <section class="bg-slate-200 rounded-xl border-2 border-slate-400">
         <h2 class="w-full text-center">TASKS</h2>
         <div class="mx-4 my-4">
-            <h3>Today</h3>
+            <h3> Today</h3>
             <!-- Create a task -->
             <div class="flex">
-                <input v-model="form_create.name" placeholder="Do the dishes" class=" rounded">
-                <button @click="create()"
+                <input v-model="form_createTask.name" placeholder="Do the dishes" class=" rounded">
+                <button @click="createtask()"
                     class="ml-2 px-2 py-1 bg-blue-200 rounded-xl border-blue-700 border-[1.8px]">Create</button>
             </div>
 
@@ -27,9 +27,6 @@
                 </template>
             </draggable>
         </div>
-
-
-
     </section>
 </template>
 
@@ -51,7 +48,7 @@ export default {
 
     data() {
         return {
-            form_create: {
+            form_createTask: {
                 name: null
             },
         }
@@ -63,8 +60,8 @@ export default {
             this.tasks = newTasks;
         },
 
-        create() {
-            this.$inertia.post(route('tasks.store'), this.form_create, {
+        createtask() {
+            this.$inertia.post(route('tasks.store'), this.form_createTask, {
                 preserveState: (page) => Object.keys(page.props.errors).length,
             })
         },
