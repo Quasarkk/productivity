@@ -10,21 +10,21 @@ use Illuminate\Database\Eloquent\Relations\hasMany;
 
 
 
-class SubPillar extends Model
+class Subpillar extends Model
 {
-    use HasFactory;
-    protected $fillable = [
+    use HasFactory;    protected $fillable = [
         'name',
         'description',
+        'pillar_id'
     ];
 
     public function pillar(): BelongsTo
     {
-        return $this->belongsTo(Pillar::class, 'foreign_key');
+        return $this->belongsTo(Pillar::class, 'pillar_id');
     }
 
-    public function objective(): HasMany
+    public function objectives()
     {
-        return $this->hasMany(Objective::class);
+        return $this->hasMany(Objective::class, 'subpillar_id');
     }
 }

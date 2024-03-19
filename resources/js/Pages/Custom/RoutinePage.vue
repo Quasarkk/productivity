@@ -236,8 +236,6 @@ export default {
             // this.errors.status = null;
             // this.errors.tags = null;
         },
-        resetUpdateForm() {
-        },
         edit(routine) {
             this.selectedRoutine = routine;
             this.isOpenEdit = true;
