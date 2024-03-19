@@ -1,41 +1,38 @@
 <template>
     <AppLayoutVertical>
-        <div class="bg-slate-100 h-screen">
-            <p class="">Pillars</p>
-
-            <!-- Pillars -->
-            <div class="flex flex-wrap gap-6 justify-center w-full mx-auto p-5">
-                <div v-for="pillar in pillars"
-                    class="bg-red-100 rounded-lg shadow-md flex flex-col p-4 m-2 w-full md:w-1/4">
-                    <div class="flex">
-                        <h2 class="text-xl font-bold text-center mb-4 w-full"> {{ pillar.name }} </h2>
-
-                        <button @click="openEditPillarModal(pillar)">
-                            <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                <path d="M13.5 6.5l4 4" />
-                            </svg>
-                        </button>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Pilliers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Dynamically create pillar cards -->
+              <div class="bg-white rounded-lg shadow overflow-hidden" v-for="pillar in pillars" :key="pillar.id">
+                <div class="px-4 py-5 sm:p-6 group">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">{{ pillar.name }}</h3>
+                    <div class="flex items-center">
+                      <button @click="openEditPillarModal(pillar)" class="text-indigo-600 hover:text-indigo-900 opacity-0 group-hover:opacity-100">
+                        <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                        <path d="M13.5 6.5l4 4" />
+                    </svg>
+                      </button>
                     </div>
-
-                    <!-- Bouton d'ajout de Sous-Pilliers -->
-                    <button @click="openCreateSubpillarModal(pillar)"
-                        class="mb-2 py-1 px-3 text-sm text-white bg-red-400 border-red-600 border-2 shadow rounded-full hover:bg-red-600 transition duration-300 ease-in-out">
-                        Ajouter Sous-Pillier +
+                  </div>
+                  <div class="mt-6">
+                    <button @click="openCreateSubpillarModal(pillar)" class="group opacity-0 group-hover:opacity-100 mt-3 w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none sm:text-sm transition duration-100 ease-in-out">
+                      Ajouter Sous-Pillier
                     </button>
-                    <div class="flex">
-
-                    </div>
+                  </div>
+                </div>
                     <!-- Subpillars -->
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4 ">
                         <div v-for="subpillar in pillar.subpillars"
-                            class="flex flex-col justify-center items-center border bg-orange-100 rounded-lg p-3 shadow">
+                            class="flex flex-col group justify-center items-center border bg-orange-100 rounded-lg p-3 shadow ">
                             <div class="flex">
-                                <h3 class="font-semibold">{{ subpillar.name }}</h3>
-                                <button @click="openEditSubpillarModal(subpillar)">
+                                <h3 class="font-medium text-gray-900">{{ subpillar.name }}</h3>
+                                <button @click="openEditSubpillarModal(subpillar)" class="opacity-0 group-hover:opacity-100">
                                     <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
@@ -47,15 +44,16 @@
                             </div>
                             <!-- Bouton d'ajout d'Objectifs -->
                             <button @click="openCreateObjectiveModal(subpillar)"
-                                class="mb-2 py-1 px-3 text-sm text-white bg-orange-400 border-orange-600 border-2 shadow rounded-full hover:bg-orange-600 transition duration-300 ease-in-out">
+                                class="opacity-0 group-hover:opacity-100 mb-2 py-1 px-3 text-sm text-white bg-orange-400 border-orange-600 border-2 shadow rounded-full hover:bg-orange-600 transition duration-100 ease-in-out">
                                 Ajouter Objectif +
                             </button>
                             <!-- Objectives -->
                             <div v-for="objective in subpillar.objectives" :key="objective.id"
-                                class="bg-yellow-100 rounded-md p-3 my-3 shadow-inner">
+                                class="bg-yellow-100 rounded-md p-3 my-3 shadow-inner group w-full">
                                 <div class="flex">
-                                    <h4 class="font-semibold">{{ objective.name }}</h4>
-                                    <button @click="openEditObjectiveModal(objective)">
+                                    <h4 class="font-medium text-gray-900">{{ objective.name }}</h4>
+                                    <button @click="openEditObjectiveModal(objective)"
+                                    class="opacity-0 group-hover:opacity-100 transition duration-100 ease-in-out">
                                         <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
@@ -67,7 +65,7 @@
                                 </div>
                                 <!-- Bouton d'ajout de Sous-Objectifs -->
                                 <button @click="openCreateSubobjectiveModal(objective)"
-                                    class="mb-2 py-1 px-3 text-sm text-white bg-yellow-500 border-yellow-700 border-2 shadow rounded-full hover:bg-yellow-600 transition duration-300 ease-in-out">
+                                    class="opacity-0 group-hover:opacity-100 mb-2 py-1 px-3 text-sm text-white bg-yellow-500 border-yellow-700 border-2 shadow rounded-full hover:bg-yellow-600 transition duration-100 ease-in-out">
                                     Ajouter Sous-Objectif +
                                 </button>
                                 <!-- Subobjectives -->
@@ -75,8 +73,8 @@
                                     class="bg-green-100 rounded-md p-2 my-2">
 
                                     <div class="flex">
-                                        <h5 class="font-semibold">{{ subobjective.name }}</h5>
-                                        <button @click="openEditSubobjectiveModal(subobjective)">
+                                        <h5 class="font-medium text-gray-900">{{ subobjective.name }}</h5>
+                                        <button @click="openEditSubobjectiveModal(subobjective)" class="opacity-0 group-hover:opacity-100">
                                             <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round">
@@ -97,7 +95,6 @@
                     Ajouter Pilier +
                 </button>
             </div>
-
 
             <!-- Modale Create Pillar -->
             <div v-if="isOpenCreatePillar"
@@ -428,8 +425,6 @@
                     </button>
                 </div>
             </div>
-
-
         </div>
 
     </AppLayoutVertical>

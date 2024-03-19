@@ -48,7 +48,6 @@ Route::middleware([
 
 Route::resource("pillars", PillarController::class);
 Route::resource("subpillars", SubpillarController::class);
-
 Route::resource("objectives", ObjectiveController::class);
 Route::resource("subobjectives", SubobjectiveController::class);
 
