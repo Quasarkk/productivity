@@ -15,6 +15,8 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Crée une colonne user_id pour stocker l'ID de l'utilisateur
+
             $table->string('name');
             $table->dateTime('dates')->nullable();
 
@@ -25,6 +27,7 @@ class CreateTasksTable extends Migration
             $table->unsignedBigInteger('taskable_id')->nullable(); // For polymorphic relation
             $table->string('taskable_type')->nullable(); // For polymorphic relation
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

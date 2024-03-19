@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('pillars', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Crée une colonne user_id pour stocker l'ID de l'utilisateur
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

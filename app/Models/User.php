@@ -58,4 +58,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+        // Relation avec Piliers
+        public function pillar()
+        {
+            return $this->hasMany(Pillar::class);
+        }
+
+        public function task()
+        {
+            return $this->hasMany(Task::class);
+        }
 }
