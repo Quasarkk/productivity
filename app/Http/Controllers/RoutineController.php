@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Routine;
+use App\Models\Pillar;
+use App\Models\Subpillar;
+use App\Models\Objective;
 use App\Models\Subobjective;
+use App\Models\Routine;
+
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

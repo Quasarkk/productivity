@@ -14,7 +14,7 @@ class Pillar extends Model
     protected $fillable = [
         'name',
         'description',
-        'ideal',
+        'user_id',
     ];
 
     public function subpillars() // La méthode devrait être au pluriel
