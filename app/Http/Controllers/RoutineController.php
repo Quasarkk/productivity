@@ -19,7 +19,7 @@ class RoutineController extends Controller
         $routines = Routine::with('subobjective')->get();
         $subobjectives = Subobjective::all();
 
-        return Inertia::render('Custom/RoutinePage', [
+        return Inertia::render('App/RoutinePage', [
             'routines' => $routines,
             'subobjectives' => $subobjectives
         ]);
