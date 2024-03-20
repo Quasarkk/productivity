@@ -28,18 +28,18 @@ use App\Http\Controllers\SubpillarController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('App/HomePage', [
+    return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-})->name('home');
+})->name('landingPage');
 
 Route::prefix('app')->middleware(['auth:sanctum', 'verified'])->group(function () {
     // Tableau de bord après connexion
-    Route::get('/homepage', function () {
-        return Inertia::render('App/HomePage');
+    Route::get('/app/homepage', function () {
+        return Inertia::render('HomePage');
     })->name('home');
 
     // Les autres routes de l'application

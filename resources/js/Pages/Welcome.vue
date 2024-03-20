@@ -1,14 +1,11 @@
 <template>
-    <AppLayoutVertical>
-            <Tasks class="h-screen">
-            </Tasks>
-    </AppLayoutVertical>
+    <GuestLayout>
+        <h1 class="font-bold text-6xl text-center font-nunito">Finissez en avec la <br> <span class="text-green-800">procrastination</span></h1>
+    </GuestLayout>
   </template>
 
   <script>
-  import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
-  import Tasks from '@/Components/Custom/Tasks.vue';
-
+  import GuestLayout from '@/Layouts/GuestLayout.vue';
 
   export default {
     props:{
@@ -16,8 +13,7 @@
     },
 
     components: {
-        AppLayoutVertical,
-        Tasks,
+        GuestLayout,
     },
   };
   </script>
