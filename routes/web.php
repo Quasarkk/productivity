@@ -34,41 +34,24 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-})->name('home');
+})->name('landingPage');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::prefix('app')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Tableau de bord après connexion
+    Route::get('/app/homepage', function () {
+        return Inertia::render('HomePage');
+    })->name('home');
+
+    // Les autres routes de l'application
+    Route::resource("pillars", PillarController::class);
+    Route::resource("subpillars", SubpillarController::class);
+    Route::resource("objectives", ObjectiveController::class);
+    Route::resource("subobjectives", SubobjectiveController::class);
+    Route::resource("routines", RoutineController::class);
+    Route::resource("tasks", TaskController::class);
+
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+    Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
+    Route::get('/goals', [PillarController::class, 'index'])->name('goals');
+    Route::get('/calendar', [TaskController::class, 'indexCalendarPage'])->name('calendar');
 });
-
-Route::resource("pillars", PillarController::class);
-Route::resource("subpillars", SubpillarController::class);
-Route::resource("objectives", ObjectiveController::class);
-Route::resource("subobjectives", SubobjectiveController::class);
-
-
-
-
-
-Route::resource("routines", RoutineController::class);
-Route::resource("tasks", TaskController::class);
-// Route::put('/tasks/update/{task}', [TaskController::class, 'update'])->name('tasks.update');
-
-Route::resource("subobjectives", SubobjectiveController::class);
-
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
-Route::get('/routines', [RoutineController::class, 'index'])->name('routines');
-Route::get('/goals', [PillarController::class, 'index'])->name('goals');
-Route::get('/calendar', [TaskController::class, 'indexCalendarPage'])->name('calendar');
-
-
-// Route::get('/calendar', function(){
-//     return Inertia::render('Custom/CalendarPage');
-// })->name('calendar');
-
-

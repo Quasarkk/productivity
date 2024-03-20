@@ -29,7 +29,7 @@ class TaskController extends Controller
         $tasksNotDoneCount = Task::where('user_id', Auth::id())->where('status', 'not done')->count();
         $tasksDoneCount = Task::where('user_id', Auth::id())->where('status', 'done')->count();
 
-        return Inertia::render('Custom/TasksPage', [
+        return Inertia::render('App/TasksPage', [
             'tasks' => $tasks,
             'tasksNotDoneCount' => $tasksNotDoneCount,
             'tasksDoneCount' => $tasksDoneCount
@@ -37,18 +37,35 @@ class TaskController extends Controller
     }
 
     public function indexCalendarPage() {
-        // Similaire à `index`, mais ajoute des détails supplémentaires pour le calendrier
+        // Récupérer uniquement les tâches appartenant à l'utilisateur connecté
         $tasks = Task::where('user_id', Auth::id())
                      ->with('taskable')
                      ->get()
                      ->map(function ($task) {
                         return [
-                            // Mêmes détails que `index` avec des champs supplémentaires
+                            'id' => $task->id,
+                            'name' => $task->name,
+                            'status' => $task->status,
+                            'relatedType' => class_basename($task->taskable),
+                            'relatedName' => $task->taskable ? $task->taskable->name : null,
+                            'dates' => $task->dates,
+                            'begin_hour' => $task->begin_hour,
+                            'end_hour' => $task->end_hour,
                         ];
                      });
 
-        // Comptes basés sur l'utilisateur connecté, similaire à `index`
+        // Compter uniquement les tâches non effectuées et effectuées pour l'utilisateur connecté
+        $tasksNotDoneCount = Task::where('user_id', Auth::id())->where('status', 'not done')->count();
+        $tasksDoneCount = Task::where('user_id', Auth::id())->where('status', 'done')->count();
+
+        // Retourner la vue avec les tâches et les comptes pour l'utilisateur connecté
+        return Inertia::render('App/CalendarPage', [
+            'tasks' => $tasks,
+            'tasksNotDoneCount' => $tasksNotDoneCount,
+            'tasksDoneCount' => $tasksDoneCount
+        ]);
     }
+
 
     public function store(Request $request)
     {

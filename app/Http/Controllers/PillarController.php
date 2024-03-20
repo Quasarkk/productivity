@@ -23,7 +23,7 @@ class PillarController extends Controller
                          ->where('user_id', Auth::id()) // Filtre par user_id
                          ->get();
 
-        return Inertia::render('Custom/GoalPage', [
+        return Inertia::render('App/GoalPage', [
             'pillars' => $pillars,
         ]);
     }
