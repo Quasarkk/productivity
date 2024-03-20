@@ -33,7 +33,7 @@ const logout = () => {
         <Head :title="title" />
         <Banner />
         <div class=" flex">
-            <nav class="bg-white h-screen w-1/12 border-r border-gray-300 fixed">
+            <nav class="bg-white h-screen w-[12.5%] border-r border-gray-300 fixed">
                 <div class="flex flex-col space-y-2 p-4">
                     <!-- Logo or Application Mark here -->
                     <!-- <ApplicationMark class="mb-6" /> -->
@@ -42,45 +42,145 @@ const logout = () => {
                     <NavLink :href="route('home')" :active="route().current('home')"
                         class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
                         :class="{ 'bg-blue-200': route().current('home') }">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                        </svg>
                         <span class="text-gray-600">Home</span>
                     </NavLink>
 
                     <NavLink :href="route('tasks')" :active="route().current('tasks')"
                         class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
                         :class="{ 'bg-blue-200': route().current('tasks') }">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M9 12l2 2l4 -4" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                            <path d="M9 12l2 2l4 -4" />
+                        </svg>
                         <span class="text-gray-600">Tasks</span>
                     </NavLink>
 
                     <NavLink :href="route('calendar')" :active="route().current('calendar')"
                         class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
                         :class="{ 'bg-blue-200': route().current('calendar') }">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                            <path d="M16 3v4" />
+                            <path d="M8 3v4" />
+                            <path d="M4 11h16" />
+                            <path d="M7 14h.013" />
+                            <path d="M10.01 14h.005" />
+                            <path d="M13.01 14h.005" />
+                            <path d="M16.015 14h.005" />
+                            <path d="M13.015 17h.005" />
+                            <path d="M7.01 17h.005" />
+                            <path d="M10.01 17h.005" />
+                        </svg>
                         <span class="text-gray-600">Calendar</span>
                     </NavLink>
 
                     <NavLink :href="route('routines')" :active="route().current('routines')"
                         class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
                         :class="{ 'bg-blue-200': route().current('routines') }">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" /><path d="M20 4v5h-5" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                            <path d="M20 4v5h-5" />
+                        </svg>
                         <span class="text-gray-600">Routines</span>
                     </NavLink>
 
                     <NavLink :href="route('goals')" :active="route().current('goals')"
-                    class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
-                    :class="{ 'bg-blue-200': route().current('goals') }">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 21l8 0" /><path d="M12 17l0 4" /><path d="M7 4l10 0" /><path d="M17 4v8a5 5 0 0 1 -10 0v-8" /><path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /></svg>                    <span class="text-gray-600">Goals</span>
-                </NavLink>
+                        class="flex items-center p-2 space-x-2 rounded hover:bg-blue-100"
+                        :class="{ 'bg-blue-200': route().current('goals') }">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 stroke-gray-500" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M8 21l8 0" />
+                            <path d="M12 17l0 4" />
+                            <path d="M7 4l10 0" />
+                            <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />
+                            <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        </svg> <span class="text-gray-600">Goals</span>
+                    </NavLink>
+                    <div class="relative">
+                        <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <button v-if="$page.props.jetstream.managesProfilePhotos"
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    <img class="h-8 w-8 rounded-full object-cover"
+                                        :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
+                                </button>
 
+                                <span v-else class="inline-flex rounded-md">
+                                    <button type="button"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    </svg>
+                                    {{ $page.props.auth.user.name }}
+
+                                    <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </template>
+
+                        <template #content>
+                            <!-- Account Management -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                Manage Account
+                            </div>
+
+                            <DropdownLink :href="route('profile.show')">
+                                Profile
+                            </DropdownLink>
+
+                            <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
+                                API Tokens
+                            </DropdownLink>
+
+                            <div class="border-t border-gray-200" />
+
+                            <!-- Authentication -->
+                            <form @submit.prevent="logout">
+                                <DropdownLink as="button">
+                                    Log Out
+                                </DropdownLink>
+                            </form>
+                        </template>
+                    </Dropdown>
                 </div>
-            </nav>
+                </div>
+
+        </nav>
 
 
-            <!-- Page Content -->
-            <main class="w-11/12 ml-auto min-h-max">
-                <slot />
-            </main>
-        </div>
+
+        <!-- Page Content -->
+        <main class="w-[87.5%] ml-auto min-h-max">
+            <slot />
+        </main>
     </div>
-</template>
+</div></template>

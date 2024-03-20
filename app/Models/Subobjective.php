@@ -20,7 +20,12 @@ class Subobjective extends Model
 
     public function subpillar(): BelongsTo
     {
-        return $this->belongsTo(Subpillar::class, 'foreign_key');
+        return $this->belongsTo(Subpillar::class, 'subpillar_id');
+    }
+
+    public function objective(): BelongsTo
+    {
+        return $this->belongsTo(Objective::class, 'objective_id');
     }
 
     public function routine(): HasMany

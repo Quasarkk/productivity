@@ -14,7 +14,7 @@ class Pillar extends Model
     protected $fillable = [
         'name',
         'description',
-        'ideal',
+        'user_id',
     ];
 
     public function subpillars() // La méthode devrait être au pluriel
@@ -22,4 +22,8 @@ class Pillar extends Model
         return $this->hasMany(Subpillar::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Assurez-vous que le namespace du modèle User est correct
+    }
 }

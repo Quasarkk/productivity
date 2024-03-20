@@ -32,5 +32,10 @@ class Task extends Model
     {
         return $query->where('status', 'not done');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Assurez-vous que le namespace du modèle User est correct
+    }
 }
 
