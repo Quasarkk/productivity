@@ -1,18 +1,17 @@
 <template>
-    <section class="bg-slate-200 rounded-xl border-2 border-slate-400">
-        <h2 class="w-full text-center">TASKS</h2>
-        <div class="mx-4 my-4">
-            <h3> Today</h3>
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Tasks</h2>
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <div class="mx-4 my-4">
+            <h3 class="text-xl font-bold text-gray-900">Today</h3>
             <!-- Create a task -->
             <div class="flex">
-                <input v-model="form_createTask.name" placeholder="Do the dishes" class=" rounded">
-                <button @click="createtask()"
-                    class="ml-2 px-2 py-1 bg-blue-200 rounded-xl border-blue-700 border-[1.8px]">Create</button>
+              <input v-model="form_createTask.name" placeholder="Do the dishes" class="rounded-md border-gray-300 shadow-sm">
+              <button @click="createtask()"
+                class="ml-2 px-4 py-2 text-lg text-white bg-blue-500 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out">Create</button>
             </div>
-
-
             <!-- Display tasks -->
-            <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area">
+            <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area my-4">
                 <template #item="{ element }">
                     <div :key="element.id"
                         class="task-item flex hover:bg-gray-200 focus:bg-slate-200 focus:cursor-move hover:cursor-move px-4 rounded">
@@ -27,8 +26,10 @@
                 </template>
             </draggable>
         </div>
+      </div>
     </section>
 </template>
+
 
 <script>
 import draggable from 'vuedraggable';

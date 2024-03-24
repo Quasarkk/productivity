@@ -1,10 +1,12 @@
 <template>
     <AppLayoutVertical>
-        <h1>Routines</h1>
-        <button @click="isOpenCreate = true" class="py-2 px-1  bg-red-400 rounded">Create a routine</button>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Routines</h2>
+        <button @click="isOpenCreate = true" class="py-2 px-4 text-lg text-white bg-red-500 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">Create a routine</button>
 
-        <div class="flex flex-wrap justify-between my-8 mx-4">
-            <div v-for="routine in routines" :key="routine.id" class="bg-orange-200 w-80 rounded p-4 my-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Dynamically create routine cards -->
+          <div v-for="routine in routines" :key="routine.id" class="bg-white rounded-lg shadow overflow-hidden p-4 my-4">
                 <div class="flex flex-col">
                     <div class="flex justify-between">
                         <button @click="edit(routine)"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></button>
@@ -20,6 +22,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- MODALE CREATE -->
         <div v-if="isOpenCreate"
