@@ -16,6 +16,7 @@ class Task extends Model
     'status',
     'taskable_id',
     'taskable_type',
+    'user_id',
     ];
 
     public function taskable()

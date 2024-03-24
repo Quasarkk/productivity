@@ -70,7 +70,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $valid_data = Validator::make($request->all(), [
-            // Vos règles de validation
+            'name' => 'required',
         ])->validate();
 
         // Assurez-vous d'ajouter `user_id` aux données validées

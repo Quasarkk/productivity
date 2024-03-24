@@ -40,6 +40,9 @@ class Routine extends Model
         $frequency = $this->frequency; // Assurez-vous que c'est un tableau de jours
         $endDate = Carbon::now()->addMonth(); // Limite la création des tâches à un mois
 
+        // Remontez les relations pour obtenir le user_id du Pillar correspondant
+        $user_id = $this->subobjective->objective->subpillar->pillar->user_id;
+
         foreach ($frequency as $day) {
             $date = Carbon::now()->next($day); // Trouve la prochaine occurrence du jour spécifié
 
@@ -48,16 +51,17 @@ class Routine extends Model
                     'name' => $this->name,
                     'taskable_type' => Routine::class,
                     'taskable_id' => $this->id,
-
+                    'user_id' => $user_id, // Utilisez le user_id récupéré
                     'begin_hour' => $this->begin_hour,
-                    'end_hour'=> $this->end_hour,
-                    // Assurez-vous de ne pas avoir de 'routine_id' ici
+                    'end_hour' => $this->end_hour,
                     'dates' => $date->toDateString(),
                 ]);
                 $date->addWeek(); // Passe à la semaine suivante
             }
         }
     }
+
+
 
     public function deleteFutureTasksRoutine()
     {
