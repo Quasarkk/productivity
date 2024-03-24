@@ -7,8 +7,8 @@
             <!-- Create a task -->
             <div class="flex">
               <input v-model="form_createTask.name" placeholder="Do the dishes" class="rounded-md border-gray-300 shadow-sm">
-              <button @click="createtask()"
-                class="ml-2 px-4 py-2 text-lg text-white bg-blue-500 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out">Create</button>
+              <BaseButton variant="primary" @click="createtask()">Create
+            </BaseButton>
             </div>
             <!-- Display tasks -->
             <draggable :list="tasks" @end="updateTaskOrder" @input="updateTasks" class="drag-area my-4">
@@ -34,6 +34,8 @@
 <script>
 import draggable from 'vuedraggable';
 import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
+import BaseButton from '@/Components/Custom/BaseButton.vue';
+
 
 
 export default {
@@ -44,7 +46,9 @@ export default {
     },
 
     components: {
-        draggable, AppLayoutVertical,
+        draggable,
+        AppLayoutVertical,
+        BaseButton,
     },
 
     data() {

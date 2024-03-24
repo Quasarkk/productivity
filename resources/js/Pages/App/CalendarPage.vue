@@ -7,22 +7,17 @@
             <div class="w-[95%] mx-auto flex justify-between">
                 <!-- Calendar / todo button -->
                 <div class="border-2 shadow-md py-1 rounded">
-                    <button class="px-2 py-1 focus:bg-green-300 rounded">todo</button>
-                    <button class="px-2 py-1 focus:bg-green-300 rounded">planning</button>
+                    <BaseButton variant="" class="px-2 py-1">todo</BaseButton>
+                    <BaseButton variant="" class="px-2 py-1">planning</BaseButton>
                 </div>
-
-                <!-- Month/week/day + prevuous and next buttons -->
 
                 <!-- today + change buttons -->
                 <div class="flex">
                     <!-- Change view buttons with secondary action styling -->
                     <div class="flex space-x-1 bg-gray-100 p-1 rounded">
-                        <button @click="ShowDailyPlanning()" class="px-4 py-2 text-gray-800 rounded shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                            :class="{ 'bg-blue-100 border border-blue-500 text-blue-800': isDailyPlanning, 'hover:bg-gray-200': !isDailyPlanning }">Day</button>
-                        <button @click="ShowWeeklyPlanning()" class="px-4 py-2 text-gray-800 rounded shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                            :class="{ 'bg-blue-100 border border-blue-500 text-blue-800': isWeeklyPlanning, 'hover:bg-gray-200': !isWeeklyPlanning }">Week</button>
-                        <button @click="ShowMonthlyPlanning()" class="px-4 py-2 text-gray-800 rounded shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                            :class="{ 'bg-blue-100 border border-blue-500 text-blue-800': isMonthlyPlanning, 'hover:bg-gray-200': !isMonthlyPlanning }">Month</button>
+                        <BaseButton variant="Daily" :is-daily-planning="isDailyPlanning" @click="ShowDailyPlanning()">Day</BaseButton>
+                        <BaseButton variant="Weekly" :is-weekly-planning="isWeeklyPlanning" @click="ShowWeeklyPlanning()">Week</BaseButton>
+                        <BaseButton variant="Monthly" :is-monthly-planning="isMonthlyPlanning" @click="ShowMonthlyPlanning()">Month</BaseButton>
                     </div>
                 </div>
             </div>
@@ -32,15 +27,15 @@
                 <!-- CURRENT NEXT PREVIOUS DAY -->
                 <div class="flex justify-center align-middle">
                     <button @click="goToPreviousDay()"><svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M15 6l-6 6l6 6" />
                         </svg></button>
                     <p class="text-3xl font-bold my-auto">{{ selectedDay.format('Do MMM YYYY') }}</p>
                     <button @click="goToNextDay()"><svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M9 6l6 6l-6 6" />
                         </svg>
@@ -99,9 +94,9 @@
                                     <h3 class="text-lg font-medium text-gray-600"> Today</h3>
                                     <button @click="isOpenCreateTask = true"
                                         class="ml-2 px-2 py-1 flex items-center justify-center bg-blue-100 rounded-xl border-blue-300 text-blue-600 hover:bg-blue-200">
-                                        Add<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-1" viewBox="0 0 24 24"
-                                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                        Add<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-1"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path d="M12 5v14" />
                                             <path d="M5 12h14" />
@@ -114,7 +109,8 @@
                                     <template #item="{ element }">
                                         <div :key="element.id" @click="edit(element)"
                                             class="task-item flex items-center hover:bg-gray-100 focus:bg-gray-100 cursor-move px-4 py-2 rounded my-1">
-                                            <span class="drag-handle text-gray-400 mr-2">☰</span> <!-- Icon for the drag -->
+                                            <span class="drag-handle text-gray-400 mr-2">☰</span>
+                                            <!-- Icon for the drag -->
                                             <input class="form-checkbox h-5 w-5 text-blue-600" type="checkbox"
                                                 :checked="element.status === 'done'"
                                                 @change="changeCheck(element.id, $event.target.checked)">
@@ -123,7 +119,7 @@
                                                 {{ element.name }}
                                             </p>
                                             <p class="ml-auto text-sm text-gray-500">{{ element.relatedType }} {{
-                                                element.relatedName }}</p>
+                                element.relatedName }}</p>
                                         </div>
                                     </template>
                                 </draggable>
@@ -205,9 +201,9 @@
                             </button>
                             <!-- DELETE BUTTON -->
                             <button @click="destroy(selectedTask)"><svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
+                                    class="icon icon-tabler icon-tabler-trash" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M4 7l16 0" />
                                     <path d="M10 11l0 6" />
@@ -261,8 +257,8 @@
             <div v-if="isWeeklyPlanning" class=""> <!-- Hours column -->
                 <div class="flex justify-center align-middle">
                     <button @click="goToPreviousWeek()"><svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M15 6l-6 6l6 6" />
                         </svg></button>
@@ -270,8 +266,8 @@
                         Week {{ weekNumberInMonth }} - {{ selectedWeek.format('MMMM YYYY') }}
                     </p>
                     <button @click="goToNextWeek()"><svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M9 6l6 6l-6 6" />
                         </svg></button>
@@ -316,15 +312,15 @@
             <div v-if="isMonthlyPlanning" class="h-20">
                 <div class="flex justify-center align-middle mb-8">
                     <button @click="goToPreviousMonth()"><svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M15 6l-6 6l6 6" />
                         </svg></button>
                     <p class="text-3xl font-bold my-auto">{{ selectedMonth.format('MMMM YYYY') }}</p>
                     <button @click="goToNextMonth()"><svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-8"
-                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
+                            viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M9 6l6 6l-6 6" />
                         </svg></button>
@@ -333,8 +329,8 @@
 
                 <!-- Names of the week days -->
                 <div class="grid grid-cols-7 gap-2 text-center w-[98%] mx-auto">
-                    <div class="font-extrabold text-xl flex justify-center items-center" v-for=" day  in  days " :key="day"
-                        :class="{ 'text-orange-600': day === currentDay }">
+                    <div class="font-extrabold text-xl flex justify-center items-center" v-for=" day  in  days "
+                        :key="day" :class="{ 'text-orange-600': day === currentDay }">
                         {{ day }}
                     </div>
                 </div>
@@ -362,14 +358,17 @@
 <script>
 import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
 import Tasks from '@/Components/Custom/Tasks.vue'
+import BaseButton from '@/Components/Custom/BaseButton.vue';
 import moment from 'moment';
 import draggable from 'vuedraggable';
+
 
 export default {
     components: {
         AppLayoutVertical,
         Tasks,
         draggable,
+        BaseButton,
     },
 
     props: {

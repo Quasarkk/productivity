@@ -9,32 +9,7 @@
                         <div class="flex items-center justify-between">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">{{ pillar.name }}</h3>
                             <div class="flex items-center">
-                                <button @click="openEditPillarModal(pillar)"
-                                    class="text-indigo-600 hover:text-indigo-900 opacity-0 group-hover:opacity-100">
-                                    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-                                        <path d="M13.5 6.5l4 4" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <button @click="openCreateSubpillarModal(pillar)"
-                                class="group opacity-0 group-hover:opacity-100 mt-3 w-full inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none sm:text-sm transition duration-100 ease-in-out">
-                                Ajouter Sous-Pillier
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Subpillars -->
-                    <div class="flex flex-col gap-4 ">
-                        <div v-for="subpillar in pillar.subpillars"
-                            class="flex flex-col group justify-center items-center border bg-orange-100 rounded-lg p-3 shadow ">
-                            <div class="flex">
-                                <h3 class="font-medium text-gray-900">{{ subpillar.name }}</h3>
-                                <button @click="openEditSubpillarModal(subpillar)"
+                                <BaseButton variant="icon-blue" @click="openEditPillarModal(pillar)"
                                     class="opacity-0 group-hover:opacity-100">
                                     <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -43,13 +18,38 @@
                                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                                         <path d="M13.5 6.5l4 4" />
                                     </svg>
-                                </button>
+                                </BaseButton>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <BaseButton variant="primary" @click="openCreateSubpillarModal(pillar)"
+                                class="group opacity-0 group-hover:opacity-100">
+                                Ajouter Sous-Pillier
+                            </BaseButton>
+                        </div>
+                    </div>
+                    <!-- Subpillars -->
+                    <div class="flex flex-col gap-4 ">
+                        <div v-for="subpillar in pillar.subpillars"
+                            class="flex flex-col group justify-center items-center border bg-orange-100 rounded-lg p-3 shadow ">
+                            <div class="flex">
+                                <h3 class="font-medium text-gray-900">{{ subpillar.name }}</h3>
+                                <BaseButton variant="" @click="openEditSubpillarModal(subpillar)"
+                                    class="opacity-0 group-hover:opacity-100">
+                                    <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                        <path d="M13.5 6.5l4 4" />
+                                    </svg>
+                                </BaseButton>
                             </div>
                             <!-- Bouton d'ajout d'Objectifs -->
-                            <button @click="openCreateObjectiveModal(subpillar)"
-                                class="opacity-0 group-hover:opacity-100 mb-2 py-1 px-3 text-sm text-white bg-orange-400 border-orange-600 border-2 shadow rounded-full hover:bg-orange-600 transition duration-100 ease-in-out">
+                            <BaseButton variant="orange" @click="openCreateObjectiveModal(subpillar)"
+                                class="opacity-0 group-hover:opacity-100">
                                 Ajouter Objectif +
-                            </button>
+                            </BaseButton>
                             <!-- Objectives -->
                             <div v-for="objective in subpillar.objectives" :key="objective.id"
                                 class="bg-yellow-100 rounded-md p-3 my-3 shadow-inner group w-full">
@@ -67,10 +67,10 @@
                                     </button>
                                 </div>
                                 <!-- Bouton d'ajout de Sous-Objectifs -->
-                                <button @click="openCreateSubobjectiveModal(objective)"
-                                    class="opacity-0 group-hover:opacity-100 mb-2 py-1 px-3 text-sm text-white bg-yellow-500 border-yellow-700 border-2 shadow rounded-full hover:bg-yellow-600 transition duration-100 ease-in-out">
+                                <BaseButton variant="yellow" @click="openCreateSubobjectiveModal(objective)"
+                                    class="opacity-0 group-hover:opacity-100">
                                     Ajouter Sous-Objectif +
-                                </button>
+                                </BaseButton>
                                 <!-- Subobjectives -->
                                 <div v-for="subobjective in objective.subobjectives" :key="subobjective.id"
                                     class="bg-green-100 rounded-md p-2 my-2">
@@ -79,9 +79,9 @@
                                         <h5 class="font-medium text-gray-900">{{ subobjective.name }}</h5>
                                         <button @click="openEditSubobjectiveModal(subobjective)"
                                             class="opacity-0 group-hover:opacity-100">
-                                            <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                                                 <path d="M13.5 6.5l4 4" />
@@ -94,10 +94,9 @@
                     </div>
                 </div>
                 <!-- Bouton d'ajout de Piliers -->
-                <button @click="isOpenCreatePillar = true"
-                    class="py-2 px-4 text-lg text-white bg-red-500 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">
+                <BaseButton variant="primary" @click="isOpenCreatePillar = true">
                     Ajouter Pilier +
-                </button>
+                </BaseButton>
             </div>
 
             <!-- Modale Create Pillar -->
@@ -107,13 +106,13 @@
                 <div class=" w-6/12 p-6 bg-white my-auto rounded-lg">
                     <!-- CLOSE BUTTONS -->
                     <div class="flex items-center justify-end mb-3">
-                        <button @click="closeCreateModalePillar()" class="">
+                        <BaseButton variant="" @click="closeCreateModalePillar()" class="">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <p>Create a pillar</p>
                     <!-- NAME -->
@@ -133,9 +132,9 @@
 
 
                     <!-- CREATE BUTTON  -->
-                    <button @click="createPillar(form_createPillar)"
-                        class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
-                        Create a pillar</button>
+                    <BaseButton variant="primary" @click="createPillar(form_createPillar)">
+                        Create a pillar
+                    </BaseButton>
 
                 </div>
             </div>
@@ -145,9 +144,9 @@
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
                     <div class="flex items-center justify-between mb-3">
                         <button @click="deletePillar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M4 7l16 0" />
                                 <path d="M10 11l0 6" />
@@ -157,13 +156,13 @@
                             </svg>
                         </button>
 
-                        <button @click="closeEditModalPillar">
+                        <BaseButton variant="" @click="closeEditModalPillar">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <p>Edit a pillar</p>
                     <div class="mt-3">
@@ -178,9 +177,9 @@
                             v-model="form_editPillar.description" type="text">
                     </div>
 
-                    <button @click="editPillar"
-                        class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
-                        Update pillar</button>
+                    <BaseButton variant="primary" @click="editPillar">
+                        Update pillar
+                    </BaseButton>
                 </div>
             </div>
 
@@ -193,13 +192,13 @@
                     <!-- Close button & form similar to Create Pillar -->
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Créer un Sous-Pillier</h3>
-                        <button @click="closeCreateModalSubpillar" class="text-red-500 hover:text-red-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
+                        <BaseButton variant="" @click="closeCreateModalSubpillar">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <div class="space-y-4">
                         <div>
@@ -213,8 +212,9 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                         </div>
                         <input type="hidden" v-model="form_createSubpillar.pillar_id">
-                        <button @click="createSubpillar"
-                            class="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">Créer</button>
+                        <BaseButton variant="primary" @click="createSubpillar">
+                            Créer un sous-pillier
+                        </BaseButton>
                     </div>
                 </div>
             </div>
@@ -223,10 +223,10 @@
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
                     <div class="flex items-center justify-between mb-3">
-                        <button @click="deleteSubpillar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                        <BaseButton variant="" @click="deleteSubpillar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M4 7l16 0" />
                                 <path d="M10 11l0 6" />
@@ -234,14 +234,14 @@
                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                             </svg>
-                        </button>
-                        <button @click="closeEditModalSubpillar">
+                        </BaseButton>
+                        <BaseButton variant="" @click="closeEditModalSubpillar">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <p>Edit Subpillar</p>
                     <div class="mt-3">
@@ -253,10 +253,9 @@
                         <input class="block mt-1 w-full rounded-md border-gray-300 shadow-sm"
                             v-model="form_editSubpillar.description" type="text">
                     </div>
-                    <button @click="editSubpillar"
-                        class="mt-4 rounded border shadow-sm px-4 py-2 bg-blue-500 text-white hover:bg-blue-600">
+                    <BaseButton variant="primary" @click="editSubpillar">
                         Update Subpillar
-                    </button>
+                    </BaseButton>
                 </div>
             </div>
 
@@ -269,13 +268,13 @@
                     <!-- Close button & form similar to Create Pillar -->
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Créer un Objectif</h3>
-                        <button @click="closeCreateModalObjective" class="text-red-500 hover:text-red-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"></path>
+                        <BaseButton variant="" @click="closeCreateModalObjective">
+                            <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48">
+                                <path
+                                    d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <div class="space-y-4">
                         <div>
@@ -294,8 +293,9 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                         </div>
                         <input type="hidden" v-model="form_createObjective.subpillar_id">
-                        <button @click="createObjective"
-                            class="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">Créer</button>
+
+                        <BaseButton variant="primary" @click="createObjective">Créer
+                        </BaseButton>
                     </div>
                 </div>
             </div>
@@ -305,9 +305,9 @@
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
                     <div class="flex items-center justify-between mb-3">
                         <button @click="deleteObjective()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M4 7l16 0" />
                                 <path d="M10 11l0 6" />
@@ -316,13 +316,13 @@
                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                             </svg>
                         </button>
-                        <button @click="closeEditModalObjective()">
+                        <BaseButton variant="" @click="closeEditModalObjective()">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <p>Edit Objective</p>
                     <div class="mt-3">
@@ -338,10 +338,9 @@
                         <input class="block mt-1 w-full rounded-md border-gray-300 shadow-sm"
                             v-model="form_editObjective.deadline" type="date">
                     </div>
-                    <button @click="editObjective"
-                        class="mt-4 rounded border shadow-sm px-4 py-2 bg-blue-500 text-white hover:bg-blue-600">
+                    <BaseButton variant="primary" @click="editObjective">
                         Update Objective
-                    </button>
+                    </BaseButton>
                 </div>
             </div>
 
@@ -354,13 +353,13 @@
                     <!-- Close button & form -->
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Créer un Sous-Objectif</h3>
-                        <button @click="closeCreateModalSubobjective" class="text-red-500 hover:text-red-600">
+                        <BaseButton variant="" @click="closeCreateModalSubobjective">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <div class="space-y-4">
                         <div>
@@ -379,8 +378,9 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                         </div>
                         <input type="hidden" v-model="form_createSubobjective.objective_id">
-                        <button @click="createSubobjective"
-                            class="w-full bg-blue-500 text-white rounded-md py-2 hover:bg-blue-600">Créer</button>
+                        <BaseButton variant="primary" @click="createSubobjective">
+                            Créer
+                        </BaseButton>
                     </div>
                 </div>
             </div>
@@ -389,10 +389,10 @@
                 class="fixed top-0 bg-black/20 w-full h-full justify-center flex backdrop-blur-md overflow-auto">
                 <div class="w-6/12 p-6 bg-white my-auto rounded-lg">
                     <div class="flex items-center justify-between mb-3">
-                        <button @click="deleteSubobjective()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                        <BaseButton variant="" @click="deleteSubobjective()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M4 7l16 0" />
                                 <path d="M10 11l0 6" />
@@ -400,14 +400,14 @@
                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                             </svg>
-                        </button>
-                        <button @click="closeEditModalSubobjective()">
+                        </BaseButton>
+                        <BaseButton variant="" @click="closeEditModalSubobjective()">
                             <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48">
                                 <path
                                     d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                             </svg>
-                        </button>
+                        </BaseButton>
                     </div>
                     <p>Edit Subobjective</p>
                     <div class="mt-3">
@@ -423,23 +423,23 @@
                         <input class="block mt-1 w-full rounded-md border-gray-300 shadow-sm"
                             v-model="form_editSubobjective.deadline" type="date">
                     </div>
-                    <button @click="editSubobjective"
-                        class="mt-4 rounded border shadow-sm px-4 py-2 bg-blue-500 text-white hover:bg-blue-600">
+                    <BaseButton variant="primary" @click="editSubobjective">
                         Update Subobjective
-                    </button>
+                    </BaseButton>
                 </div>
             </div>
         </div>
-
     </AppLayoutVertical>
 </template>
 
 <script>
 import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
+import BaseButton from '@/Components/Custom/BaseButton.vue';
 
 export default {
     components: {
         AppLayoutVertical,
+        BaseButton,
     },
     props: {
         pillars: Array,
@@ -465,10 +465,6 @@ export default {
                 name: null,
                 description: null,
             },
-
-
-
-
             //subpillars
             isOpenCreateSubpillar: false,
             form_createSubpillar: {
@@ -484,9 +480,6 @@ export default {
                 description: null,
                 pillar_id: null, // Vous pouvez avoir besoin de l'ID du pilier parent pour la mise à jour
             },
-
-
-
             //objectives
             isOpenCreateObjective: false,
             form_createObjective: {
@@ -504,9 +497,6 @@ export default {
                 deadline: null,
                 subpillar_id: null,
             },
-
-
-
             // Subobjectives
             isOpenCreateSubobjective: false,
             form_createSubobjective: {
@@ -573,8 +563,6 @@ export default {
                 },
             });
         },
-
-
 
 
 

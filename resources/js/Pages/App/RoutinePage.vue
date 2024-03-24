@@ -2,14 +2,16 @@
     <AppLayoutVertical>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Routines</h2>
-        <button @click="isOpenCreate = true" class="py-2 px-4 text-lg text-white bg-red-500 rounded-full hover:bg-red-700 transition duration-300 ease-in-out">Create a routine</button>
+        <BaseButton variant="primary" @click="isOpenCreate = true">Create a routine</BaseButton>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Dynamically create routine cards -->
           <div v-for="routine in routines" :key="routine.id" class="bg-white rounded-lg shadow overflow-hidden p-4 my-4">
                 <div class="flex flex-col">
                     <div class="flex justify-between">
-                        <button @click="edit(routine)"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></button>
+                        <BaseButton variant="" @click="edit(routine)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg>
+                        </BaseButton>
                     </div>
                     <p>{{ routine.name }}</p>
                     <div class="flex-wrap flex my-2">
@@ -31,13 +33,13 @@
             <div class=" w-6/12 p-6 bg-white my-auto rounded-lg">
                 <!-- CLOSE BUTTONS -->
                 <div class="flex items-center justify-end mb-3">
-                    <button @click="closeCreateModale" class="">
+                    <BaseButton variant="" @click="closeCreateModale">
                         <svg class="w-6 h-6  fill-red-700 hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 48 48">
                             <path
                                 d="M 38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375 L 24 21.171875 L 10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062 L 21.171875 24 L 7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062 L 24 26.828125 L 37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938 L 26.828125 24 L 40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z" />
                         </svg>
-                    </button>
+                    </BaseButton>
                 </div>
                 <p>Create a routine</p>
                 <!-- NAME -->
@@ -84,9 +86,9 @@
                 </div>
 
                 <!-- CREATE BUTTON  -->
-                <button @click="create(form_create)"
-                    class="mt-4 rounded border focus:ring-cyan-500 focus:ring-2 focus:ring-offset-2 transition ease-in-out duration-50 active:bg-cyan-900 bg-cyan-800 hover:bg-cyan-700 font-medium w-full text-white px-2 py-1 uppercase">
-                    Create a routine</button>
+                <BaseButton variant="primary" @click="create(form_create)">
+                    Create a routine
+                </BaseButton>
 
             </div>
         </div>
@@ -160,8 +162,13 @@
 
 <script>
 import AppLayoutVertical from '@/Layouts/AppLayoutVertical.vue';
+import BaseButton from '@/Components/Custom/BaseButton.vue';
 
 export default {
+    components: {
+        AppLayoutVertical,
+        BaseButton,
+    },
     props: {
         routines: Array,
         subobjectives: Array,
@@ -203,9 +210,6 @@ export default {
             deep: true,
             immediate: true
         }
-    },
-    components: {
-        AppLayoutVertical,
     },
     methods: {
         closeCreateModale() {
